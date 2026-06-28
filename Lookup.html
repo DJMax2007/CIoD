@@ -1,0 +1,312 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Table Lookup</title>
+
+    <link rel="icon" href="favicon.png" type="image/png">
+  </head>
+
+  <style>
+    :root {
+      --ciod-dark: #1a3a32;
+      --ciod-gold: #c9a84c;
+      --ciod-gold-light: #e8c97a;
+      --ciod-green-deep: #0f2a22;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: transparent; }
+
+    .wrap {
+      min-height: 100vh;
+      width: 100vw;
+      background: var(--ciod-dark);
+      padding: 2.5rem 2rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      font-family: var(--font-sans, sans-serif);
+    }
+
+    .logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .org-name {
+      font-size: 11px;
+      color: #a0c4b8;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .tagline {
+      font-size: 11px;
+      color: var(--ciod-gold);
+      font-style: italic;
+      letter-spacing: 0.5px;
+    }
+
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--ciod-gold);
+      opacity: 0.4;
+    }
+
+    .event-label {
+      font-size: 12px;
+      color: #a0c4b8;
+      text-align: center;
+      letter-spacing: 0.5px;
+    }
+
+    .event-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: white;
+      text-align: center;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .table-input {
+      flex: 1;
+      height: 48px;
+      border-radius: 10px;
+      border: 1.5px solid rgba(201,168,76,0.5);
+      background: rgba(255,255,255,0.07);
+      color: white;
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: var(--font-sans, sans-serif);
+    }
+
+    .table-input::-webkit-outer-spin-button,
+    .table-input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    .table-input {
+      -moz-appearance: textfield;
+      appearance: textfield;
+    }
+
+    .table-input::placeholder {
+      color: rgba(255,255,255,0.25);
+      font-size: 14px;
+      font-weight: 400;
+    }
+
+    .table-input:focus {
+      border-color: var(--ciod-gold);
+    }
+
+    .go-btn {
+      height: 48px;
+      padding: 0 22px;
+      border-radius: 10px;
+      background: var(--ciod-gold);
+      color: var(--ciod-green-deep);
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      font-family: var(--font-sans, sans-serif);
+      white-space: nowrap;
+    }
+
+    .go-btn:hover { background: var(--ciod-gold-light); }
+    .go-btn:active { transform: scale(0.97); }
+
+    .result-card {
+      width: 100%;
+      max-width: 420px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 14px;
+      padding: 1.5rem 1.5rem;
+      display: none;
+      flex-direction: column;
+      gap: 0.6rem;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .result-card.visible { display: flex; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .result-table-num {
+      font-size: 12px;
+      color: var(--ciod-gold);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .result-topic {
+      font-size: 17px;
+      font-weight: 500;
+      color: white;
+      line-height: 1.4;
+    }
+
+    .result-prompt {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+
+    .invalid-msg {
+      font-size: 13px;
+      color: #e07070;
+      display: none;
+    }
+
+    .invalid-msg.visible { display: block; }
+
+    .hint {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+  </style>
+
+  <body>
+    <div class="wrap">
+      <div class="logo-area">
+        <img src="images.jpg" alt="CIoD" width="45" height="48">
+        <div style="font-size:26px;font-weight:700;color:white;letter-spacing:1px;line-height:1;">CIoD</div>
+        <div class="org-name"><b>Chartered Institute<br>of Directors Nigeria</b></div>
+        <div class="tagline">Excellence. Governance. Impact.</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="text-align:center;">
+        <div class="event-label">2026 Women Directors Biennial Conference July 1 2026</div>
+        <div style="height:6px;"></div>
+        <div class="event-title">Networking Lunch Table Question Lookup</div>
+      </div>
+
+      <div class="input-row">
+        <input class="table-input" type="number" id="tableInput" placeholder="Enter table no" min="1" max="50">
+        <button class="go-btn" onclick="lookup()">Find question</button>
+      </div>
+
+      <span class="hint">Tables 1 to 50</span>
+
+      <div class="result-card" id="resultCard">
+        <div class="result-table-num" id="resultNum"></div>
+        <div class="result-topic" id="resultTopic"></div>
+        <div class="result-prompt" id="resultPrompt"></div>
+      </div>
+
+      <div class="invalid-msg" id="invalidMsg">
+        Invalid table number. Please enter a number between 1 and 50.
+      </div>
+    </div>
+
+
+    <script>
+      const questions = {
+        1: ["The Career Risk That Changed Everything", "Tell us about a professional risk you took that significantly shaped your career."],
+        2: ["The Boardroom Moment I Will Never Forget", "Share a boardroom experience that taught you an unforgettable lesson."],
+        3: ["The Best Piece of Career Advice I Almost Ignored", "What was it, and what happened when you eventually acted on it?"],
+        4: ["A Leadership Mistake That Made Me Better", "Share a mistake that ultimately strengthened your leadership."],
+        5: ["The Opportunity I Nearly Said No To", "What made you hesitate, and how did things turn out?"],
+        6: ["The Most Difficult Conversation I Have Had as a Leader", "How did you approach it, and what did you learn?"],
+        7: ["My Biggest Surprise About Leadership", "What turned out to be very different from what you expected?"],
+        8: ["The Person Who Opened a Door for Me", "Tell us about someone whose sponsorship, support, or belief changed your trajectory."],
+        9: ["The Toughest Decision I Have Had to Make", "What made it difficult, and how did you navigate it?"],
+        10: ["The Moment I Realized I Belonged at the Table", "Share a defining moment when your confidence or influence shifted."],
+        11: ["The Most Valuable Feedback I Ever Received", "What was it, and how did it change you?"],
+        12: ["A Time I Had to Challenge the Majority View", "How did you do it, and what was the outcome?"],
+        13: ["A Leadership Lesson I Learned Outside the Workplace", "What experience shaped your leadership unexpectedly?"],
+        14: ["The Assumption About My Industry That People Always Get Wrong", "What would you like others to understand?"],
+        15: ["The Best Investment I Ever Made in Myself", "A course, mentor, experience, network, habit, or decision."],
+        16: ["If I Could Give My 35-Year-Old Self One Piece of Advice", "What would it be and why?"],
+        17: ["The Most Unexpected Opportunity of My Career", "How did it come about?"],
+        18: ["What Keeps Me Optimistic About the Future", "Share a trend, development, or experience that gives you hope."],
+        19: ["The Leadership Practice I Refuse to Compromise On", "What principle or habit remains non-negotiable for you?"],
+        20: ["The Conversation We Need to Have More Often in Boardrooms", "What important topic deserves more attention?"],
+        21: ["The Career Risk That Changed Everything", "Tell us about a professional risk you took that significantly shaped your career."],
+        22: ["The Boardroom Moment I Will Never Forget", "Share a boardroom experience that taught you an unforgettable lesson."],
+        23: ["The Best Piece of Career Advice I Almost Ignored", "What was it, and what happened when you eventually acted on it?"],
+        24: ["A Leadership Mistake That Made Me Better", "Share a mistake that ultimately strengthened your leadership."],
+        25: ["The Opportunity I Nearly Said No To", "What made you hesitate, and how did things turn out?"],
+        26: ["The Most Difficult Conversation I Have Had as a Leader", "How did you approach it, and what did you learn?"],
+        27: ["My Biggest Surprise About Leadership", "What turned out to be very different from what you expected?"],
+        28: ["The Person Who Opened a Door for Me", "Tell us about someone whose sponsorship, support, or belief changed your trajectory."],
+        29: ["The Toughest Decision I Have Had to Make", "What made it difficult, and how did you navigate it?"],
+        30: ["The Moment I Realized I Belonged at the Table", "Share a defining moment when your confidence or influence shifted."],
+        31: ["The Most Valuable Feedback I Ever Received", "What was it, and how did it change you?"],
+        32: ["A Time I Had to Challenge the Majority View", "How did you do it, and what was the outcome?"],
+        33: ["A Leadership Lesson I Learned Outside the Workplace", "What experience shaped your leadership unexpectedly?"],
+        34: ["The Assumption About My Industry That People Always Get Wrong", "What would you like others to understand?"],
+        35: ["The Best Investment I Ever Made in Myself", "A course, mentor, experience, network, habit, or decision."],
+        36: ["If I Could Give My 35 Year Old Self One Piece of Advice", "What would it be and why?"],
+        37: ["The Most Unexpected Opportunity of My Career", "How did it come about?"],
+        38: ["What Keeps Me Optimistic About the Future", "Share a trend, development, or experience that gives you hope."],
+        39: ["The Leadership Practice I Refuse to Compromise On", "What principle or habit remains non negotiable for you?"],
+        40: ["The Conversation We Need to Have More Often in Boardrooms", "What important topic deserves more attention?"],
+        41: ["The Career Risk That Changed Everything", "Tell us about a professional risk you took that significantly shaped your career."],
+        42: ["The Boardroom Moment I Will Never Forget", "Share a boardroom experience that taught you an unforgettable lesson."],
+        43: ["The Best Piece of Career Advice I Almost Ignored", "What was it, and what happened when you eventually acted on it?"],
+        44: ["A Leadership Mistake That Made Me Better", "Share a mistake that ultimately strengthened your leadership."],
+        45: ["The Opportunity I Nearly Said No To", "What made you hesitate, and how did things turn out?"],
+        46: ["The Most Difficult Conversation I Have Had as a Leader", "How did you approach it, and what did you learn?"],
+        47: ["My Biggest Surprise About Leadership", "What turned out to be very different from what you expected?"],
+        48: ["The Person Who Opened a Door for Me", "Tell us about someone whose sponsorship, support, or belief changed your trajectory."],
+        49: ["The Toughest Decision I Have Had to Make", "What made it difficult, and how did you navigate it?"],
+        50: ["The Moment I Realized I Belonged at the Table", "Share a defining moment when your confidence or influence shifted."],
+      };
+
+      function lookup() {
+            const val = parseInt(document.getElementById('tableInput').value);
+            const card = document.getElementById('resultCard');
+            const invalid = document.getElementById('invalidMsg');
+
+            card.classList.remove('visible');
+            invalid.classList.remove('visible');
+
+            if (!val || val < 1 || val > 50) {
+              invalid.classList.add('visible');
+              return;
+            }
+
+            const q = questions[val];
+
+            document.getElementById('resultNum').textContent = 'Table ' + val;
+            document.getElementById('resultTopic').textContent = q[0];
+            document.getElementById('resultPrompt').textContent = q[1];
+
+            card.classList.add('visible');
+          }
+
+          document.getElementById('tableInput').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') lookup();
+          });
+    </script>
+    
+  </body>
+</html>
