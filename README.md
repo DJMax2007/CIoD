@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project is a simple interactive web application built for the Chartered Institute of Directors Nigeria Women Directors Biennial Conference 2026. It enables users to enter a table number and instantly receive a curated discussion question designed for networking and leadership conversation.
+This project is a simple interactive web application built for the Chartered Institute of Directors Nigeria Women Directors Biennial Conference 2026. It enables users to enter a table number and instantly receive a curated discussion question designed for networking and leadership conversations.
 
 The interface is designed to be clean, responsive, and easy to use during live conference sessions.
 
@@ -14,7 +14,7 @@ If the input is empty or outside the valid range, an error message is shown aski
 
 ## Features
 
-1. Instant lookup of table based discussion questions  
+1. Instant lookup of table-based discussion questions  
 2. Clean and modern user interface  
 3. Responsive layout for mobile and desktop use  
 4. Enter key support for quick interaction  
@@ -22,18 +22,8 @@ If the input is empty or outside the valid range, an error message is shown aski
 
 ## Screenshot
 
-Add your website screenshot below this line by replacing the file name with your actual image.
-
-![Website Screenshot](screenshot.png)
+<img width="1912" height="852" alt="image" src="https://github.com/user-attachments/assets/9159d783-1f28-463b-91cf-dda580be0a4d" />
 
 ## Usage
 
 Open the project in any modern web browser. Enter a table number from 1 to 50 in the input field. Click the find button or press enter. The corresponding discussion question will appear in a styled result card.
-
-## Project Context
-
-This application supports structured networking at the Women Directors Biennial Conference 2026 hosted by the Chartered Institute of Directors Nigeria. It is designed to encourage meaningful dialogue through guided conversation prompts.
-
-## Powered By
-
-MTN Nigeria and NDDC
