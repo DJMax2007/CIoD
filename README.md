@@ -22,7 +22,8 @@ If the input is empty or outside the valid range, an error message is shown aski
 
 ## Screenshot
 
-<img width="1912" height="852" alt="image" src="https://github.com/user-attachments/assets/9159d783-1f28-463b-91cf-dda580be0a4d" />
+<img width="1917" height="850" alt="image" src="https://github.com/user-attachments/assets/a3d2e517-949e-4f9d-aedf-41a66c0c48cb" />
+
 
 ## Usage
 
